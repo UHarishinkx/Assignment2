@@ -1,15 +1,23 @@
 public class Assignment2 {
 
-    static void linearSearch(String[] arr, String key) {
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i].equals(key))
-                System.out.println("Found at index " + i);
+    static void findFloorCeil(int[] arr, int key) {
+        int floor = -1, ceil = -1;
+
+        for (int x : arr) {
+            if (x <= key) floor = x;
+            if (x >= key) {
+                ceil = x;
+                break;
+            }
         }
+
+        System.out.println("Floor: " + floor);
+        System.out.println("Ceil: " + ceil);
     }
 
     public static void main(String[] args) {
-        String[] arr = {"A", "B", "C", "B"};
+        int[] arr = {10, 25, 50, 100};
 
-        linearSearch(arr, "B");
+        findFloorCeil(arr, 30);
     }
 }
