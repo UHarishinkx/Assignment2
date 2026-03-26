@@ -1,35 +1,37 @@
-public class Assignments2 {
+class Asset {
+    String name;
+    double returnRate;
 
-    static void mergeSort(int[] arr, int l, int r) {
-        if (l < r) {
-            int m = (l + r) / 2;
-            mergeSort(arr, l, m);
-            mergeSort(arr, m + 1, r);
-            merge(arr, l, m, r);
-        }
+    Asset(String n, double r) {
+        name = n;
+        returnRate = r;
     }
+}
 
-    static void merge(int[] arr, int l, int m, int r) {
-        int[] temp = new int[r - l + 1];
-        int i = l, j = m + 1, k = 0;
+public class Assignment2 {
 
-        while (i <= m && j <= r) {
-            if (arr[i] < arr[j]) temp[k++] = arr[i++];
-            else temp[k++] = arr[j++];
+    static void sort(Asset[] arr) {
+        for (int i = 0; i < arr.length - 1; i++) {
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[i].returnRate > arr[j].returnRate) {
+                    Asset temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                }
+            }
         }
-
-        while (i <= m) temp[k++] = arr[i++];
-        while (j <= r) temp[k++] = arr[j++];
-
-        System.arraycopy(temp, 0, arr, l, temp.length);
     }
 
     public static void main(String[] args) {
-        int[] arr = {500, 100, 300};
+        Asset[] arr = {
+                new Asset("AAPL", 12),
+                new Asset("TSLA", 8),
+                new Asset("GOOG", 15)
+        };
 
-        mergeSort(arr, 0, arr.length - 1);
+        sort(arr);
 
-        for (int x : arr)
-            System.out.print(x + " ");
+        for (Asset a : arr)
+            System.out.println(a.name + " " + a.returnRate);
     }
 }
